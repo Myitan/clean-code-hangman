@@ -69,10 +69,6 @@ When trying to enter an already guessed or an invalid character, an error messag
 
 ## Technical Specification
 
-The following classes are mandatory; without them, the tests won't run.
-
-![](https://raw.githubusercontent.com/epam-mep-java/exercise-specification-images/main/clean-code-hangman/Hangman.png)
-
 (package: com.epam.training.hangman)
  
 | Class          | Description                                                                                                                                                                                                             |
