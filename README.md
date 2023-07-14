@@ -3,7 +3,7 @@
 
 In this exercise students get a working implementation of the Hangman game. The implementation intentionally does not follow Clean Code principles.  
 
-The task is to improve the application, so it follows clean code rules.
+The task is to improve the application, so that the student solution follows clean code principles.
 
 New classes and packages can be introduced while refactoring the code.
 
