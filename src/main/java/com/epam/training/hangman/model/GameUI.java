@@ -1,6 +1,7 @@
 package com.epam.training.hangman.model;
 
 import com.epam.training.hangman.HangmanLogic;
+import com.epam.training.hangman.State;
 
 public class GameUI {
 

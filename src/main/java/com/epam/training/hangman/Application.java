@@ -2,7 +2,6 @@ package com.epam.training.hangman;
 
 import com.epam.training.hangman.io.UserInputHandler;
 import com.epam.training.hangman.model.GameUI;
-import com.epam.training.hangman.model.State;
 import com.epam.training.hangman.model.WordProvider;
 
 import java.util.Scanner;

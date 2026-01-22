@@ -1,7 +1,5 @@
 package com.epam.training.hangman;
 
-import com.epam.training.hangman.model.State;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +91,7 @@ public class HangmanLogic {
     }
 
     public List<Character> getLettersTried() {
-        return guessedLetters;
+        return List.copyOf(guessedLetters);
     }
 
     public int getWrongGuessesLeft() {
