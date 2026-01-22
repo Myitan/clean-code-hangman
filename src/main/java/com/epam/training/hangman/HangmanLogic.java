@@ -1,6 +1,5 @@
-package com.epam.training.hangman.game;
+package com.epam.training.hangman;
 
-import com.epam.training.hangman.io.UserInputHandler;
 import com.epam.training.hangman.model.State;
 
 import java.util.ArrayList;

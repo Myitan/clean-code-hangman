@@ -1,6 +1,5 @@
 package com.epam.training.hangman;
 
-import com.epam.training.hangman.game.HangmanLogic;
 import com.epam.training.hangman.io.UserInputHandler;
 import com.epam.training.hangman.model.GameUI;
 import com.epam.training.hangman.model.State;
