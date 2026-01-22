@@ -4,7 +4,6 @@ import com.epam.training.hangman.io.UserInputHandler;
 import com.epam.training.hangman.model.State;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class HangmanLogic {
@@ -92,9 +91,6 @@ public class HangmanLogic {
 
     public State getState() {
         return state;
-    }
-    public List<Character> getGuessedLetters() {
-        return Collections.unmodifiableList(guessedLetters);
     }
 
     public List<Character> getLettersTried() {

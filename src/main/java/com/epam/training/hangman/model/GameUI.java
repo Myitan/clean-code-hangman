@@ -10,8 +10,8 @@ public class GameUI {
     }
 
     public static void displayGameState(HangmanLogic game) {
-        System.out.println("The word: " + game.getDisplayedWord());
-        System.out.println("Letters tried: " + game.getGuessedLetters());
+        System.out.println("The word: " + formatDisplayedWord(game.getDisplayedWord()));
+        System.out.println("Letters tried: " + game.getLettersTried());
         System.out.println("Wrong guesses until game over: " + game.getWrongGuessesLeft());
         System.out.println();
     }
@@ -26,6 +26,10 @@ public class GameUI {
             System.out.println("The word was: " + game.getTargetWord());
         }
         System.out.println();
+    }
+
+    private static String formatDisplayedWord(String word) {
+        return word.replace("", " ").trim();
     }
 
     public static void displayError(String message) {
