@@ -1,66 +1,38 @@
 package com.epam.training.hangman;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Random;
+import com.epam.training.hangman.game.HangmanLogic;
+import com.epam.training.hangman.io.UserInputHandler;
+import com.epam.training.hangman.model.GameUI;
+import com.epam.training.hangman.model.State;
+import com.epam.training.hangman.model.WordProvider;
+
 import java.util.Scanner;
 
-public class Application extends Object {
-    public String word;
-    public List<Character> lettersTried;
-    public int wrongGuessCount;
+public class Application {
 
     public static void main(String[] args) {
-        // Init
-        // Warning: don't close this Scanner, that would close System.in as well,
-        // making it inaccessible throughout the rest of the program.
-        Scanner scnr = new Scanner(System.in, StandardCharsets.UTF_8);
-        Random r = new Random();
-        String[] db = {"hangman", "apple", "bee", "clean", "computer", "office", "recursion"};
-        String w = db[r.nextInt(db.length)];
-        HangmanLogic l = new HangmanLogic(w);
-        System.out.println("Welcome to the Hangman game!");
-        System.out.println();
+        WordProvider wordProvider = new WordProvider();
+        String targetWord = wordProvider.getRandomWord();
+        HangmanLogic game = new HangmanLogic(targetWord);
 
-        // main cycle
-        String s;
-        do {
-            System.out.println("The word: " + l.getDisplayedWord());
-            System.out.println("Letters tried: " + l.lettersTried);
-            System.out.println("Wrong guesses until game over: " + (7 - l.wrongGuessCount));
-            // inner cycle
-            while (true) {
-                String in = "";
-                boolean stay = true;
-                while (stay) {
-                    System.out.print("Enter your guess: ");
-                    in = scnr.next();
-                    System.out.println();
-                    if (in.length() == 1) stay = false;
-                    else {
-                        System.out.println("Error: please enter a single character only!");
-                        System.out.println();
-                    }
-                }
-                try {
-                    // guessing
-                    l.guess(in.charAt(0));
-                    break;
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                    System.out.println();
-                }
-            }
-        } while (l.state == "In progress");
-
-        // end
-        if (l.state == "Won") {
-            System.out.println("Congratulations, you won!");
-            System.out.println("The word was: " + w);
-        } else {
-            System.out.println("You have no more tries left, you lost the game");
-            System.out.println("The word was: " + w);
+        try (Scanner scanner = new Scanner(System.in)) {
+            UserInputHandler inputHandler = new UserInputHandler(scanner);
+            GameUI.displayWelcomeMessage();
+            playGame(game, inputHandler);
+            GameUI.displayGameResult(game);
         }
     }
 
+    private static void playGame(HangmanLogic game, UserInputHandler inputHandler) {
+        while (game.getState() == State.IN_PROGRESS) {
+            GameUI.displayGameState(game);
+            char guess = inputHandler.getValidGuess();
+
+            try {
+                game.guess(guess);
+            } catch (IllegalArgumentException e) {
+                GameUI.displayError(e.getMessage());
+            }
+        }
+    }
 }
