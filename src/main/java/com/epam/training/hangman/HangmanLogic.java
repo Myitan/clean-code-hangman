@@ -1,7 +1,10 @@
 package com.epam.training.hangman;
 
+import com.epam.training.hangman.io.UserInputHandler;
+
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class HangmanLogic {
     public static final int MAXGUESSCOUNT = 7;
@@ -11,7 +14,7 @@ public class HangmanLogic {
     public State state;
 
     public HangmanLogic(String word){
-        validateWord(word);
+        UserInputHandler.validateWord(word);
         this.targetWord = word.toLowerCase();
         this.guessedLetters = new ArrayList<>();
         wrongGuessCount = 0;
@@ -19,28 +22,13 @@ public class HangmanLogic {
     }
 
     public void guess(char letter) {
-        validateGuess(letter);
+        UserInputHandler.validateGuess(letter);
         char normalizedLetter = Character.toLowerCase(letter);
         if (guessedLetters.contains(normalizedLetter)){
             throw new IllegalArgumentException("the provided character has already benn guessed");
         }
         guessedLetters.add(normalizedLetter);
         updateGameState(normalizedLetter);
-    }
-
-    private void validateWord(String word) {
-        if (word == null || word.isEmpty()) {
-            throw new IllegalArgumentException("Word cannot be null or empty");
-        }
-        if (!word.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Word must contain only letters from English alphabet");
-        }
-    }
-
-    private void validateGuess(char letter) {
-        if (!Character.isLetter(letter)) {
-            throw new IllegalArgumentException("Guess must be a letter from English alphabet");
-        }
     }
 
     public void updateGameState(char letter){
