@@ -23,12 +23,24 @@ public class HangmanLogic {
 
     public void guess(char letter) {
         UserInputHandler.validateGuess(letter);
-        char normalizedLetter = Character.toLowerCase(letter);
-        if (guessedLetters.contains(normalizedLetter)){
+        char normalizedLetter = normalizeLetter(letter);
+        checkIfLetterAlreadyGuesed(normalizedLetter);
+        addLetterToGuessedLetters(normalizedLetter);
+        updateGameState(normalizedLetter);
+    }
+
+    private void addLetterToGuessedLetters(char normalizedLetter) {
+        guessedLetters.add(normalizedLetter);
+    }
+
+    private char normalizeLetter(char letter) {
+        return Character.toLowerCase(letter);
+    }
+
+    private void checkIfLetterAlreadyGuesed(char letter) {
+        if (guessedLetters.contains(letter)){
             throw new IllegalArgumentException("the provided character has already benn guessed");
         }
-        guessedLetters.add(normalizedLetter);
-        updateGameState(normalizedLetter);
     }
 
     public void updateGameState(char letter){
